@@ -15,3 +15,5 @@ spring:
       ddl-auto: none
 server:
   port: 9999
+
+#http://localhost:9999/h2-console/test.do?jsessionid=f93d0e642d313b45534e5fb6c364da5d

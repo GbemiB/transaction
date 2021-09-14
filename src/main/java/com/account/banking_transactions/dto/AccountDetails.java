@@ -8,7 +8,7 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "account", schema = "online_bank")
-public class Account {
+public class AccountDetails {
     @Id
     private long id;
     private String sortCode;
@@ -16,13 +16,13 @@ public class Account {
     private double currentBalance;
     private String bankName;
     private String ownerName;
-    private transient List<Transaction> transactions;
+    private transient List<TransactionDetails> transactions;
 
-    public Account() {
+    public AccountDetails() {
     }
 
-    public Account(long id, String sortCode, String accountNumber,
-                   double currentBalance, String bankName, String ownerName) {
+    public AccountDetails(long id, String sortCode, String accountNumber,
+                          double currentBalance, String bankName, String ownerName) {
         this.id = id;
         this.sortCode = sortCode;
         this.accountNumber = accountNumber;
@@ -31,9 +31,9 @@ public class Account {
         this.ownerName = ownerName;
     }
 
-    public Account(long id, String sortCode, String accountNumber,
-                   double currentBalance, String bankName, String ownerName,
-                   List<Transaction> transactions) {
+    public AccountDetails(long id, String sortCode, String accountNumber,
+                          double currentBalance, String bankName, String ownerName,
+                          List<TransactionDetails> transactions) {
         this.id = id;
         this.sortCode = sortCode;
         this.accountNumber = accountNumber;

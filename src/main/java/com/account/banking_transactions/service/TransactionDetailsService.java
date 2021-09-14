@@ -1,9 +1,9 @@
 package com.account.banking_transactions.service;
 
-import com.account.banking_transactions.dto.Account;
-import com.account.banking_transactions.dto.Transaction;
-import com.account.banking_transactions.repository.AccountRepository;
-import com.account.banking_transactions.repository.TransactionRepository;
+import com.account.banking_transactions.dto.AccountDetails;
+import com.account.banking_transactions.dto.TransactionDetails;
+import com.account.banking_transactions.repository.AccountDetailsRepository;
+import com.account.banking_transactions.repository.TransactionDetailsRepository;
 import com.account.banking_transactions.util.TransactionInput;
 import lombok.Data;
 import org.springframework.stereotype.Service;
@@ -13,28 +13,28 @@ import java.util.Optional;
 
 @Data
 @Service
-public class TransactionService {
-    AccountRepository accountRepository;
-    TransactionRepository transactionRepository;
+public class TransactionDetailsService {
+    AccountDetailsRepository accountRepository;
+    TransactionDetailsRepository transactionRepository;
 
-    public TransactionService(AccountRepository accountRepository, TransactionRepository transactionRepository) {
+    public TransactionDetailsService(AccountDetailsRepository accountRepository, TransactionDetailsRepository transactionRepository) {
         this.accountRepository = accountRepository;
         this.transactionRepository = transactionRepository;
     }
     public boolean makeTransfer(TransactionInput transactionInput) {
         String sourceSortCode = transactionInput.getSourceAccount().getSortCode();
         String sourceAccountNumber = transactionInput.getSourceAccount().getAccountNumber();
-        Optional<Account> sourceAccount = accountRepository
+        Optional<AccountDetails> sourceAccount = accountRepository
                 .findBySortCodeAndAccountNumber(sourceSortCode, sourceAccountNumber);
 
         String targetSortCode = transactionInput.getTargetAccount().getSortCode();
         String targetAccountNumber = transactionInput.getTargetAccount().getAccountNumber();
-        Optional<Account> targetAccount = accountRepository
+        Optional<AccountDetails> targetAccount = accountRepository
                 .findBySortCodeAndAccountNumber(targetSortCode, targetAccountNumber);
 
         if (sourceAccount.isPresent() && targetAccount.isPresent()) {
             if (isAmountAvailable(transactionInput.getAmount(), sourceAccount.get().getCurrentBalance())) {
-                var transaction = new Transaction();
+                var transaction = new TransactionDetails();
                 transaction.setAmount(transactionInput.getAmount());
                 transaction.setSourceAccountId(sourceAccount.get().getId());
                 transaction.setTargetAccountId(targetAccount.get().getId());
@@ -52,7 +52,7 @@ public class TransactionService {
         return false;
     }
 
-    private void updateAccountBalance(Account account, double amount) {
+    private void updateAccountBalance(AccountDetails account, double amount) {
         account.setCurrentBalance((account.getCurrentBalance() - amount));
         accountRepository.save(account);
     }

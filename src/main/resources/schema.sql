@@ -16,11 +16,18 @@ CREATE TABLE online_bank.transaction (
     source_account_id bigint NOT NULL REFERENCES online_bank.account(id),
     target_account_id bigint NOT NULL REFERENCES online_bank.account(id),
     -- Partially denormalize for performance
-    target_owner_name varchar(50) NOT NULL,
-    amount NUMERIC(10,3) NOT NULL,
-    initiation_date timestamp NOT NULL,
+    source_owner_name varchar(50),
+    source_country varchar(50),
+    target_owner_name varchar(50),
+    target_country varchar(50),
+    currency varchar(50),
+    amount NUMERIC(10,3),
+    initiation_date timestamp,
     completion_date TIMESTAMP,
     reference VARCHAR(255),
+    comment VARCHAR(255),
     latitude REAL,
     longitude REAL
 );
+
+

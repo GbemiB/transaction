@@ -1,6 +1,6 @@
 package com.account.banking_transactions.controller;
 
-import com.account.banking_transactions.service.TransactionService;
+import com.account.banking_transactions.service.TransactionDetailsService;
 import com.account.banking_transactions.util.InputValidator;
 import com.account.banking_transactions.util.TransactionInput;
 import org.slf4j.Logger;
@@ -26,10 +26,10 @@ import java.util.Map;
         private static final String INVALID_TRANSACTION =
                 "Account information is invalid or transaction has been denied for your protection. Please try again.";
 
-        private final TransactionService transactionService;
+        private final TransactionDetailsService transactionService;
 
         @Autowired
-        public TransactionRestController(TransactionService transactionService) {
+        public TransactionRestController(TransactionDetailsService transactionService) {
             this.transactionService = transactionService;
         }
 

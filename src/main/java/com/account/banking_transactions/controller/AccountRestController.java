@@ -1,7 +1,9 @@
 package com.account.banking_transactions.controller;
 
-import com.account.banking_transactions.dto.Account;
-import com.account.banking_transactions.service.AccountService;
+
+import com.account.banking_transactions.dto.AccountDetails;
+import com.account.banking_transactions.service.AccountDetailsService;
+
 import com.account.banking_transactions.util.AccountInput;
 import com.account.banking_transactions.util.InputValidator;
 import org.slf4j.Logger;
@@ -30,10 +32,10 @@ import java.util.Map;
         private static final String NO_ACCOUNT_FOUND =
                 "Unable to find an account matching this sort code and account number";
 
-        private final AccountService accountService;
+        private final AccountDetailsService accountService;
 
         @Autowired
-        public AccountRestController(AccountService accountService) {
+        public AccountRestController(AccountDetailsService accountService) {
             this.accountService = accountService;
         }
 
@@ -48,7 +50,7 @@ import java.util.Map;
             // Validate input
             if (InputValidator.isSearchCriteriaValid(accountInput)) {
                 // Attempt to retrieve the account information
-                Account account = accountService.getAccount(
+                AccountDetails account = accountService.getAccount(
                         accountInput.getSortCode(), accountInput.getAccountNumber());
 
                 // Return the account details, or warn that no account was found for given input
