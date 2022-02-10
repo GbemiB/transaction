@@ -1,5 +1,6 @@
 package com.account.banking_transactions.controller;
 
+import com.account.banking_transactions.dto.CheckAmountAvailability;
 import com.account.banking_transactions.service.TransactionDetailsService;
 import com.account.banking_transactions.util.InputValidator;
 import com.account.banking_transactions.util.TransactionInput;
@@ -33,5 +34,16 @@ import javax.validation.Valid;
             }
         }
 
+        @PostMapping(value = "/checkavailability")
+        public ResponseEntity<?> checkAmountAvailability(@Valid @RequestBody CheckAmountAvailability availability) {
+            if (availability.getAmount() != 0 && availability.getAccountBalance() != 0
+                    && availability.getAccountBalance() > availability.getAmount()) {
+                boolean isAmountAvailable = transactionService.isAmountAvailable(availability.getAmount(),
+                        availability.getAccountBalance());
+                return new ResponseEntity<>(isAmountAvailable, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+        }
     }
 

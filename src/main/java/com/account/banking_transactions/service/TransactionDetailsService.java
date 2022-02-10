@@ -52,12 +52,12 @@ public class TransactionDetailsService {
         return false;
     }
 
-    private void updateAccountBalance(AccountDetails account, double amount) {
+    public void updateAccountBalance(AccountDetails account, double amount) {
         account.setCurrentBalance((account.getCurrentBalance() - amount));
         accountRepository.save(account);
     }
 
-    private boolean isAmountAvailable(double amount, double accountBalance) {
+    public boolean isAmountAvailable(double amount, double accountBalance) {
         return (accountBalance - amount) > 0;
     }
 }
