@@ -1,17 +1,18 @@
-package com.account.banking_transactions.util;
+package com.account.gbemi_world.util;
 
 import lombok.Data;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Positive;
+
 @Data
 public class TransactionInput {
     private AccountInput sourceAccount;
     private AccountInput targetAccount;
 
-   @Positive(message = "Transfer amount must be positive")
-   @Min(value = 1, message = "Amount must be larger than 1")
+    @Positive(message = "Transfer amount must be positive")
+    @Min(value = 1, message = "Amount must be larger than 1")
     private double amount;
 
     private String reference;
@@ -24,5 +25,6 @@ public class TransactionInput {
     @Max(value = 180, message = "Longitude must be between -180 and 180")
     private Double longitude;
 
-    public TransactionInput() {}
+    public TransactionInput() {
+    }
 }

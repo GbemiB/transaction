@@ -1,4 +1,4 @@
-package com.account.banking_transactions.util;
+package com.account.gbemi_world.util;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;

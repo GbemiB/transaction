@@ -1,4 +1,4 @@
-package com.account.banking_transactions.dto;
+package com.account.gbemi_world.dto;
 
 import lombok.Data;
 

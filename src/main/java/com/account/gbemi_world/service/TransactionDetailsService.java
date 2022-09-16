@@ -1,26 +1,24 @@
-package com.account.banking_transactions.service;
+package com.account.gbemi_world.service;
 
-import com.account.banking_transactions.dto.AccountDetails;
-import com.account.banking_transactions.dto.TransactionDetails;
-import com.account.banking_transactions.repository.AccountDetailsRepository;
-import com.account.banking_transactions.repository.TransactionDetailsRepository;
-import com.account.banking_transactions.util.TransactionInput;
+import com.account.gbemi_world.dto.AccountDetails;
+import com.account.gbemi_world.dto.TransactionDetails;
+import com.account.gbemi_world.repository.AccountDetailsRepository;
+import com.account.gbemi_world.repository.TransactionDetailsRepository;
+import com.account.gbemi_world.util.TransactionInput;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Data
+@RequiredArgsConstructor
 @Service
 public class TransactionDetailsService {
-    AccountDetailsRepository accountRepository;
-    TransactionDetailsRepository transactionRepository;
+    private final AccountDetailsRepository accountRepository;
+    private final TransactionDetailsRepository transactionRepository;
 
-    public TransactionDetailsService(AccountDetailsRepository accountRepository, TransactionDetailsRepository transactionRepository) {
-        this.accountRepository = accountRepository;
-        this.transactionRepository = transactionRepository;
-    }
     public boolean makeTransfer(TransactionInput transactionInput) {
         String sourceSortCode = transactionInput.getSourceAccount().getSortCode();
         String sourceAccountNumber = transactionInput.getSourceAccount().getAccountNumber();
